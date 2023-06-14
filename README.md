@@ -28,10 +28,32 @@ public static GenericContainer container = new GenericContainer(
 ```
 ### How it works
 
-The extension applies the **Contract Testing** guidelines: the OpenAPI specification describes the endpoints and payloads
-produced and consumed by the API. Using the OpenAPI examples defined in the file the (mock) API returns, for a given request, 
-the matching response.
-
+The extension is designed to fullfil the **Contract Testing** approach: the OpenAPI specification describes the endpoints and payloads
+produced and consumed by the API. The OpenAPI examples, found in the file, define which request triggers a given response.
+```
+/users:
+    post:
+      summary: Create user
+      requestBody:
+        content:
+          application/json:
+             # request examples
+            examples:
+              example-user-eur:
+                $ref: '#/components/examples/create-user-eur'
+              example-user-us:
+                $ref: '#/components/examples/create-user-us'
+    responses:
+        '200':
+          content:
+            application/json:
+              # response examples
+              examples:
+                create-user-1:
+                  $ref: '#/components/examples/create-user-eur-200'
+                create-user-2:
+                  $ref: '#/components/examples/create-user-us-200'        
+```
 Do you want to know how the interactions (request-response matching) are generated?
 Find out more in [Contract Testing with OpenAPI](https://medium.com/geekculture/contract-testing-with-openapi-42267098ddc7) and
 visit the [OpenAPI Testcontainers](https://github.com/gcatanese/openapi-testcontainers) repository.

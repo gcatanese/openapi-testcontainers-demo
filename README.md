@@ -9,6 +9,9 @@ The `UserService` class includes methods to manage users invoking a REST API.
 The `UserServiceTest` implements the unit testing where Testcontainers is used to create a container with a mock 
 server of the API being used.
 
+The Testcontainer is created on-the-fly from the OpenAPI specification (ie `users-openapi.yaml`).
+
+
 ### Usage
 
 ```java
@@ -26,7 +29,14 @@ public static GenericContainer container = new GenericContainer(
 ```
 ### How it works
 
-The Testcontainer is created on-the-fly from the OpenAPI specification (ie `users-openapi.yaml`).
+The extension applies the **Contract Testing** guidelines: the OpenAPI specification describes the endpoints and payloads
+produced and consumed by the API. Using the OpenAPI examples defined in the file the (mock) API returns, for a given request, 
+the matching response.
+
+Do you want to know how the interactions (request-response matching) are generated?
+Find out more in [Contract Testing with OpenAPI](https://medium.com/geekculture/contract-testing-with-openapi-42267098ddc7) and
+visit the [OpenAPI Testcontainers](https://github.com/gcatanese/openapi-testcontainers) repository.
+
 
 
 

@@ -1,0 +1,266 @@
+openapi: 3.0.0
+info:
+  title: Users Manager API
+  version: '1.0'
+  description: APIs to manage Users
+paths:
+  '/users/{userId}':
+    get:
+      summary: Get User Info by Id
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+      tags:
+        - basic
+      parameters:
+        - description: User identifier
+          name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 888
+          examples:
+            valid:
+              x-contract-id: get-user-0001
+              value: usr0001
+              summary: success 200
+            another valid user:
+              x-contract-id: get-user-0099
+              value: usr0099
+              summary: another user
+            user not found:
+              x-contract-id: get-user-9999
+              value: usr9999
+              summary: user does not exist
+
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Get User Alice Smith:
+                  $ref: '#/components/examples/get-user-id-0001'
+                Get User Phil Smith:
+                  $ref: '#/components/examples/get-user-id-0099'
+        '404':
+          content:
+            application/json:
+              examples:
+                error:
+                  $ref: '#/components/examples/user-does-not-exist'
+                  value: null
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: User Not Found
+
+  '/users':
+    post:
+      description: Create a new user.
+      operationId: post-user
+      requestBody:
+        content:
+          application/json:
+            examples:
+              basic:
+                $ref: '#/components/examples/post-user-request-200'
+                value: null
+              another:
+                $ref: '#/components/examples/post-user-another-request-200'
+                value: null
+              error 400:
+                $ref: '#/components/examples/post-user-error-request-400'
+                value: null
+            schema:
+              $ref: '#/components/schemas/post-user-request'
+        description: Post the necessary fields for the API to create a new user.
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                basic:
+                  $ref: '#/components/examples/post-user-response-200'
+                  value: null
+                another:
+                  $ref: '#/components/examples/post-user-another-response-200'
+                  value: null
+              schema:
+                $ref: '#/components/schemas/User'
+          description: User Created
+        "400":
+          content:
+            application/json:
+              examples:
+                error:
+                  $ref: '#/components/examples/post-user-error-response-400'
+                  value: null
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Missing Required Information
+        "409":
+          description: Email Already Taken
+      summary: Create New User
+      tags:
+        - basic
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      example:
+        id: 999
+        firstName: Alice9 schema example
+        lastName: Smith9
+        email: alice.smith@gmail.com
+        dateOfBirth: '01/01/2000'
+        emailVerified: true
+        createDate: '01/01/2000'
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+    post-user-request:
+      title: User post request
+      type: object
+      description: ''
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+      required:
+        - firstName
+        - lastName
+        - email
+    Error:
+      title: Error object
+      type: object
+      description: 'An error'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  examples:
+    post-user-request-200:
+      x-contract-id: post-user-200
+      summary: Example request for POST with status 200
+      value:
+        firstName: Rosco
+        lastName: Irvine
+        email: r.irvine@example.com
+    post-user-another-request-200:
+      x-contract-id: post-user-200-b
+      summary: Another example request for POST with status 200
+      value:
+        firstName: Alan
+        lastName: Dogman
+        email: a.dogman@example.com
+    post-user-error-request-400:
+      x-contract-id: post-user-400
+      summary: Example request for POST with status 400
+      value:
+        firstName:
+        lastName:
+        email: r.irvine@example.com
+    post-user-response-200:
+      x-contract-id: post-user-200
+      summary: Example response for POST with status 200
+      value:
+        id: newuser-010
+        firstName: Rosco
+        lastName: Irvine
+        email: r.irvine@example.com
+        emailVerified: false
+        createDate: '11/11/2005'
+    post-user-another-response-200:
+      x-contract-id: post-user-200-b
+      summary: Another example response for POST with status 200
+      value:
+        id: 00002
+        firstName: Alan
+        lastName: Dogman
+        email: a.dogman@example.com
+        emailVerified: false
+        createDate: '01/01/2000'
+    post-user-error-response-400:
+      x-contract-id: post-user-400
+      summary: Example response for POST with status 400
+      value:
+        code: err 400
+        message: Invalid input
+    get-user-id-0001:
+      x-contract-id: get-user-0001
+      summary: Get user Alan
+      value:
+        id: usr0001
+        firstName: Alan
+        lastName: Dogman
+        email: a.dogman@example.com
+        emailVerified: false
+        createDate: '23/12/2000'
+    get-user-id-0099:
+      x-contract-id: get-user-0099
+      summary: Get user Alan
+      value:
+        id: usr0099
+        firstName: Rod
+        lastName: Mett
+        email: r.mett@example.com
+        emailVerified: true
+        createDate: '04/09/2004'
+    user-does-not-exist:
+      x-contract-id: get-user-9999
+      summary: User not found
+      value:
+        code: err 404
+        message: User not found
+
+
+tags:
+  - name: basic
+    description: Basic tag
+  - name: advanced
+    description: Advanced tag

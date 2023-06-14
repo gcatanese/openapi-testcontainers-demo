@@ -29,7 +29,7 @@ public static GenericContainer container = new GenericContainer(
 ```
 Make sure the [Dockerfile](https://github.com/gcatanese/openapi-testcontainers-demo/blob/main/Dockerfile) is available in your project.
 
-The first execution might take some time in order to download the base image. The actual Testcontainers image is instead pretty small 
+**Note**: the first execution might take some time in order to download the base image. The actual Testcontainers image is instead pretty small 
 and it is rebuilt only upon changes in the OpenAPI specification. 
 
 ### How it works

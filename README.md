@@ -15,6 +15,7 @@ server of the API being used.
 // define path to OpenAPI file
 private final static String OPENAPI_FILE = "src/test/resources/users-openapi.yaml";
 
+// load container
 @ClassRule
 public static GenericContainer container = new GenericContainer(
         new ImageFromDockerfile("my-test-cont", false)
@@ -25,7 +26,7 @@ public static GenericContainer container = new GenericContainer(
 ```
 ### How it works
 
-The Testcontainer is created on-the-fly from the OpenAPI specification (ie `users-openapi.yaml).
+The Testcontainer is created on-the-fly from the OpenAPI specification (ie `users-openapi.yaml`).
 
 
 

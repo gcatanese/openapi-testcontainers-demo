@@ -20,10 +20,13 @@ public class UserServiceTest {
 
     UserService userService;
 
+    // define path to OpenAPI file
+    private final static String OPENAPI_FILE = "src/test/resources/users-openapi.yaml";
+
     @ClassRule
     public static GenericContainer container = new GenericContainer(
             new ImageFromDockerfile("my-test-cont", false)
-                    .withFileFromFile("openapi.yaml", new File("src/test/resources/users-openapi.yaml"))
+                    .withFileFromFile("openapi.yaml", new File(OPENAPI_FILE))
                     .withFileFromFile("Dockerfile", new File("Dockerfile"))
     )
             .withExposedPorts(8080);

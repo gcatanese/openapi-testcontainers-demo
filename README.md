@@ -5,12 +5,11 @@ Demo of the OpenAPI Testcontainers extension
 
 This repository includes a sample on how to use the [OpenAPI Testcontainers](https://github.com/gcatanese/openapi-testcontainers) extension.
 
-The `UserService` class includes methods to manage users invoking a REST API.  
-The `UserServiceTest` implements the unit testing where Testcontainers is used to create a container with a mock 
-server of the API being used.
+The `UserService` class includes the methods to manage users invoking a REST API.  
+The `UserServiceTest` implements the unit testing where Testcontainer is used to create a container with a mock 
+server of the API.
 
 The Testcontainer is created on-the-fly from the OpenAPI specification (ie `users-openapi.yaml`).
-
 
 ### Usage
 

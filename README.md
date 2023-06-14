@@ -13,6 +13,7 @@ The Testcontainer is created on-the-fly from the OpenAPI specification (ie `user
 
 ### Usage
 
+Define the container and the path to the OpenAPI file in the test classes:
 ```java
 // define path to OpenAPI file
 private final static String OPENAPI_FILE = "src/test/resources/users-openapi.yaml";
@@ -26,6 +27,11 @@ public static GenericContainer container = new GenericContainer(
         )
         .withExposedPorts(8080);
 ```
+Make sure the [Dockerfile](https://github.com/gcatanese/openapi-testcontainers-demo/blob/main/Dockerfile) is available in your project.
+
+The first execution might take some time in order to download the base image. The actual Testcontainers image is instead pretty small 
+and it is rebuilt only upon changes in the OpenAPI specification. 
+
 ### How it works
 
 The extension is designed to fullfil the **Contract Testing** approach: the OpenAPI specification describes the endpoints and payloads

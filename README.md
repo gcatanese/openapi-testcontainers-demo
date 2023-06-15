@@ -63,7 +63,7 @@ Do you want to know how the interactions (request-response matching) are generat
 Find out more in [Contract Testing with OpenAPI](https://medium.com/geekculture/contract-testing-with-openapi-42267098ddc7) and
 visit the [OpenAPI Testcontainers](https://github.com/gcatanese/openapi-testcontainers) repository.
 
-
+Is your OpenAPI specification NOT ready for Contract Testing? Too bad, you can still use the OpenAPI Testcontainer as it will always return a default HTTP response compatible with the expected JSON schema.
 
 
 

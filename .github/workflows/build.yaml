@@ -1,8 +1,11 @@
-name: maven package
+name: Build and test
+
 on:
   push:
-    branches:
-      - feature/github-actions
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest

@@ -45,6 +45,7 @@ public class UserServiceTest {
         User user = userService.get("usr0001");
 
         assertEquals("usr0001", user.getId());
+        assertEquals("Alan", user.getFirstName());
     }
 
     @Test

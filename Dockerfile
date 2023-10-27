@@ -1,9 +1,9 @@
-FROM gcatanese/openapi-testcontainers
+FROM gcatanese/openapi-native-mock-server
 
 ADD openapi.yaml /openapi/openapi.yaml
 
-RUN java -cp /openapi/bin/openapi-testcontainers.jar:/openapi/bin/openapi-generator-cli.jar \
-  org.openapitools.codegen.OpenAPIGenerator generate -g com.tweesky.cloudtools.codegen.TestContainersCodegen \
+RUN java -cp /openapi/bin/openapi-native-mock-server.jar:/openapi/bin/openapi-generator-cli.jar \
+  org.openapitools.codegen.OpenAPIGenerator generate -g com.tweesky.cloudtools.codegen.NativeMockServerCodegen \
    -i /openapi/openapi.yaml -o /openapi/go-server
 
 FROM golang:1.19-alpine3.15

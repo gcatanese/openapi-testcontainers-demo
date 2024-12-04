@@ -60,7 +60,7 @@ produced and consumed by the API. The OpenAPI examples, found in the file, defin
                   $ref: '#/components/examples/create-user-us-200'        
 ```
 Do you want to know how the interactions (request-response matching) are generated?
-Find out more in [Contract Testing with OpenAPI](https://medium.com/geekculture/contract-testing-with-openapi-42267098ddc7) and
+Find out more in [Contract Testing with OpenAPI](https://beppecatanese.hashnode.dev/contract-testing-with-openapi) and
 visit the [OpenAPI Testcontainers](https://github.com/gcatanese/openapi-testcontainers) repository.
 
 Is your OpenAPI specification NOT ready for Contract Testing? Too bad, you can still use the OpenAPI Testcontainer as it will always return a default HTTP response compatible with the expected JSON schema.
